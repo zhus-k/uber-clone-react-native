@@ -3,14 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
+import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Text>I will build a clone of Uber!</Text>
-        <StatusBar style="auto" />
-      </View>
+      <HomeScreen />
     </Provider>
   );
 }
