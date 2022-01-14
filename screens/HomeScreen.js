@@ -2,12 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native';
 import tw from 'twrnc';
 import NavOptions from '../components/NavOptions';
-
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { GOOGLE_MAPS_API_KEY } from '@env';
+import { useDispatch } from 'react-redux';
 
 const HomeScreen = () => {
+    const dispatch = useDispatch();
+
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
-            <View style={tw`p-5`}>
+            <View style={styles.container}>
 
                 <Image
                     style={{
@@ -16,6 +20,48 @@ const HomeScreen = () => {
                         resizeMode: 'contain',
                     }}
                     source={{ uri: 'https://links.papareact.com/gzs' }}
+                />
+
+                <GooglePlacesAutocomplete
+                    placeholder='From where?'
+                    styles={{
+                        container: {
+                            flex: 0,
+                        },
+                        textInput: {
+                            fontSize: 18,
+                        },
+                    }}
+                    query={{
+                        key: GOOGLE_MAPS_API_KEY,
+                        language: 'en'
+                    }}
+                    onPress={(data, details = null) => {
+                        dispatch(
+                            setOrigin({
+                                location: details.geometry.location,
+                                description: data.description,
+                            })
+                        );
+                        dispatch(
+                            setDestination(null)
+                        );
+                        console.log(data, details);
+                    }}
+                    listViewDisplayed='auto'
+                    nearbyPlacesAPI='GooglePlacesSearch'
+                    debounce={400}
+                    enablePoweredByContainer={false}
+                    minLength={2}
+                    fetchDetails={true}
+                    requestUrl={{
+                        useOnPlatform: 'web', // or "all"
+                        url:
+                            'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api', // or any proxy server that hits https://maps.googleapis.com/maps/api
+                        headers: {
+                            Authorization: `an auth token`, // if required for your proxy
+                        },
+                    }}
                 />
 
                 <NavOptions />
@@ -28,7 +74,9 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-    text: {
-        color: "blue",
-    }
+    container: {
+        flex: 1,
+        width: '100%',
+        padding: 10,
+    },
 });
