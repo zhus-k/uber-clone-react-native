@@ -42,7 +42,8 @@ const NavOptions = () => {
                             style={tw`p-2 bg-black rounded-4 w-10 mt-4`}
                             name='arrowright'
                             color='white'
-                            type='antdesign' />
+                            type='antdesign'
+                        />
                     </View>
                 </TouchableOpacity>
             )}
