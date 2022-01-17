@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectOrigin, selectDestination } from '../slices/navSlice';
+import { selectOrigin, selectDestination, setTravelTimeInformation } from '../slices/navSlice';
 import { GOOGLE_MAPS_API_KEY } from '@env'
 import MapViewDirections from 'react-native-maps-directions';
+import tw from 'twrnc';
 
 const Map = () => {
     const origin = useSelector(selectOrigin);
@@ -40,7 +41,7 @@ const Map = () => {
                 .then(res => res.json())
                 .then(data => {
                     // console.log(data);
-                    dispatch(getTravelTimeInformation(data.rows[0].elements[0]));
+                    dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
                 })
         }
 
@@ -53,8 +54,8 @@ const Map = () => {
             style={tw`flex-1`}
             mapType={"mutedStandard"}
             initialRegion={{
-                latitude: origin.latitude,
-                longitude: origin.longitude,
+                latitude: origin.location.lat,
+                longitude: origin.location.lng,
                 latitudeDelta: 0.005,
                 longitudeDelta: 0.005,
             }}
@@ -71,12 +72,23 @@ const Map = () => {
             {
                 origin?.location && <Marker
                     coordinate={{
-                        latitude: origin.latitude,
-                        longitude: origin.longitude
+                        latitude: origin.location.lat,
+                        longitude: origin.location.lng,
                     }}
                     title='Origin'
                     description={origin.description}
                     identifier='origin'
+                />
+            }
+            {
+                destination?.location && <Marker
+                    coordinate={{
+                        latitude: destination.location.lat,
+                        longitude: destination.location.lng,
+                    }}
+                    title='Destination'
+                    description={destination.description}
+                    identifier='Destination'
                 />
             }
         </MapView>

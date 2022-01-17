@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-web';
 import { useSelector } from 'react-redux';
 import tw from 'twrnc';
 import { selectTravelTimeInformation } from '../slices/navSlice';
@@ -40,13 +39,12 @@ const RideOptionsCard = () => {
             <View>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('NavigateCard')}
-                    style={tw`absolute top-3 left-5 rounded-full`}
+                    style={tw`absolute z-50 top-6 left-5 rounded-full`}
                 >
                     <Icon
                         name='chevron-left'
                         type='font-awesome'
                     />
-
                 </TouchableOpacity>
                 <Text style={tw`text-center py-5 text-xl`}>Select a Ride - {travelTimeInformation?.distance?.text}</Text>
             </View>
@@ -71,9 +69,11 @@ const RideOptionsCard = () => {
                             <Text>{travelTimeInformation?.duration?.text} Travel Time</Text>
                         </View>
                         <Text style={tw`text-xl`}>
+                            $
                             {
-                                new Intl.NumberFormat('en-us', { style: 'currency', currency: 'USD' })
-                                    .format(travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier / 100)
+                                // new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' })
+                                //     .format(travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier / 100)
+                                travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier / 100
                             }
                         </Text>
                     </TouchableOpacity>
@@ -83,9 +83,9 @@ const RideOptionsCard = () => {
             <View style={tw`mt-auto border-t border-gray-200`}>
                 <TouchableOpacity
                     disabled={!selected}
-                    style={tw`bg-black py-3 m-3 ${!selected} && 'bg-gray-300'`}
+                    style={tw`bg-black py-3 m-3 ${!selected && 'bg-gray-300'}`}
                 >
-                    <Text style={tw`text-centered text-white text-xl`}>Choose {selected?.title}</Text>
+                    <Text style={tw`text-center text-white text-xl`}>Choose {selected?.title}</Text>
                 </TouchableOpacity>
             </View>
 

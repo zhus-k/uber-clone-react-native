@@ -2,6 +2,8 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import tw from 'twrnc';
 import { Icon } from 'react-native-elements';
+import { useDispatch } from 'react-redux';
+import { setDestination, setOrigin } from '../slices/navSlice';
 
 const data = [
     {
@@ -19,6 +21,8 @@ const data = [
 ]
 
 const NavFavourites = () => {
+    const dispatch = useDispatch();
+
     return (
         <FlatList
             data={data}
@@ -36,8 +40,19 @@ const NavFavourites = () => {
             }
             renderItem=
             {
-                ({ item: { location, destination, icon } }) =>
+                ({ item: { location, destination, icon }, item }) =>
                     <TouchableOpacity style={tw`flex-row items-center p-5`}
+                        onPress={() => {
+                            dispatch(
+                                setOrigin({
+                                    location: location,
+                                    description: destination,
+                                })
+                            );
+                            dispatch(
+                                setDestination(null)
+                            );
+                        }}
                     >
                         <Icon
                             style={tw`mr-4 rounded-full bg-gray-300 p-3`}

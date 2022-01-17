@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_API_KEY } from '@env';
 import { useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import { setDestination } from '../slices/navSlice';
 import { useNavigation } from '@react-navigation/native';
 import NavFavourites from './NavFavourites';
 import tw from 'twrnc';
+import { Icon } from 'react-native-elements';
 
 const NavigateCard = () => {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const NavigateCard = () => {
                 <GooglePlacesAutocomplete
                     placeholder='To Where?'
                     debounce={400}
-                    nearbyPlacesAPI={GooglePlacesSearch}
+                    nearbyPlacesAPI='GooglePlacesSearch'
                     styles={{
                         container: {
                             backgroundColor: 'white',
@@ -47,12 +48,12 @@ const NavigateCard = () => {
                     fetchDetails={true}
                     returnKey={'search'}
                     minLength={2}
-                    enablePoweredByContainer={false``}
+                    enablePoweredByContainer={false}
                     onPress={(data, details = null) => {
                         dispatch(
                             setDestination({
                                 location: details.geometry.location,
-                                destination: data.description
+                                description: data.description,
                             })
                         )
                         navigation.navigate('RideOptionsCard');
