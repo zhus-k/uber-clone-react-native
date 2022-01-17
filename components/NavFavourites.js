@@ -13,7 +13,7 @@ const data = [
     {
         id: '456',
         icon: 'briefcase',
-        location: 'work',
+        location: 'Work',
         destination: 'London Eye, London, UK',
     }
 ]
@@ -27,17 +27,17 @@ const NavFavourites = () => {
                 () =>
                     <View
                         style={
-                            [tw`bg-gray-200`,
-                            { height: 0.5 }
+                            [
+                                tw`bg-gray-200`,
+                                { height: 0.5 }
                             ]
                         }
-                    >
-                    </View>
+                    />
             }
             renderItem=
             {
                 ({ item: { location, destination, icon } }) =>
-                    <TouchableOpacity stype={tw`flex-row items-center p-5`}
+                    <TouchableOpacity style={tw`flex-row items-center p-5`}
                     >
                         <Icon
                             style={tw`mr-4 rounded-full bg-gray-300 p-3`}
