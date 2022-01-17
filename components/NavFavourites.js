@@ -37,7 +37,8 @@ const NavFavourites = () => {
             renderItem=
             {
                 ({ item: { location, destination, icon } }) =>
-                    <TouchableOpacity stype={tw`flex-row items-center p-5`}>
+                    <TouchableOpacity stype={tw`flex-row items-center p-5`}
+                    >
                         <Icon
                             style={tw`mr-4 rounded-full bg-gray-300 p-3`}
                             name={icon}
