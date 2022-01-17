@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import { TouchableOpacity } from 'react-native-web';
+import { useSelector } from 'react-redux';
 import tw from 'twrnc';
+import { selectTravelTimeInformation } from '../slices/navSlice';
 
 const data = [
     {
@@ -30,6 +32,7 @@ const data = [
 const RideOptionsCard = () => {
     const navigation = useNavigation();
     const [selected, setSelected] = useState(null);
+    const travelTimeInformation = useSelector(selectTravelTimeInformation);
 
     return (
         <SafeAreaView style={tw`bg-white flex-grow`}>
@@ -44,7 +47,7 @@ const RideOptionsCard = () => {
                     />
 
                 </TouchableOpacity>
-                <Text style={tw`text-center py-5 text-xl`}>Select a Ride</Text>
+                <Text style={tw`text-center py-5 text-xl`}>Select a Ride - {travelTimeInformation?.distance.text}</Text>
             </View>
 
             <FlatList
@@ -64,7 +67,7 @@ const RideOptionsCard = () => {
                         />
                         <View style={tw`-ml-6`}>
                             <Text style={tw`text-xl font-semibold`}>{title}</Text>
-                            <Text>Travel Time...</Text>
+                            <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
                         </View>
                         <Text style={tw`text-xl`}>$$</Text>
                     </TouchableOpacity>
