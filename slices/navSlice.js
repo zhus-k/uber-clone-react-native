@@ -14,10 +14,10 @@ export const navSlice = createSlice({
             state.origin = action.payload.origin;
         },
         setDestination: (state, action) => {
-            state.origin = action.payload.destination;
+            state.destination = action.payload.destination;
         },
         setTravelTimeInformation: (state, action) => {
-            state.origin = action.payload.travelTimeInformation;
+            state.travelTimeInformation = action.payload.travelTimeInformation;
         },
     },
 
