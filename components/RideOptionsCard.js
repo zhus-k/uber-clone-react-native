@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import tw from 'twrnc';
 import { selectTravelTimeInformation } from '../slices/navSlice';
+import 'intl';
 
 const data = [
     {
@@ -66,14 +67,13 @@ const RideOptionsCard = () => {
                         />
                         <View style={tw`-ml-6`}>
                             <Text style={tw`text-xl font-semibold`}>{title}</Text>
-                            <Text>{travelTimeInformation?.duration?.text} Travel Time</Text>
+                            <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
                         </View>
                         <Text style={tw`text-xl`}>
-                            $
                             {
-                                // new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' })
-                                //     .format(travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier / 100)
-                                travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier / 100
+                                new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' })
+                                    .format(travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier / 100)
+                                // travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier / 100
                             }
                         </Text>
                     </TouchableOpacity>

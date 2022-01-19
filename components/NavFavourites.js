@@ -30,16 +30,13 @@ const NavFavourites = () => {
             ItemSeparatorComponent={
                 () =>
                     <View
-                        style={
-                            [
-                                tw`bg-gray-200`,
-                                { height: 0.5 }
-                            ]
-                        }
+                        style={[
+                            tw`bg-gray-200`,
+                            { height: 0.5 }
+                        ]}
                     />
             }
-            renderItem=
-            {
+            renderItem={
                 ({ item: { location, destination, icon }, item }) =>
                     <TouchableOpacity style={tw`flex-row items-center p-5`}
                         onPress={() => {

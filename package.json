@@ -25,13 +25,13 @@
     ]
   },
   "dependencies": {
-    "@config-plugins/android-jsc-intl": "^0.0.2",
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
     "@reduxjs/toolkit": "^1.7.1",
     "expo": "~44.0.0",
     "expo-status-bar": "~1.2.0",
+    "intl": "^1.2.5",
     "jest": "^26.6.3",
     "jest-expo": "^44.0.1",
     "react": "17.0.1",
