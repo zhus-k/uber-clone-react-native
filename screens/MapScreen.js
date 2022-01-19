@@ -7,16 +7,22 @@ import NavigateCard from '../components/NavigateCard';
 import RideOptionsCard from '../components/RideOptionsCard';
 import tw from 'twrnc';
 import Map from '../components/Map';
+import { useDispatch } from 'react-redux';
+import { clearNav } from '../slices/navSlice';
 
 const MapScreen = () => {
     const Stack = createNativeStackNavigator();
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     return (
         <View>
 
             <TouchableOpacity
-                onPress={() => navigation.navigate('HomeScreen')}
+                onPress={() => {
+                    navigation.navigate('HomeScreen');
+                    dispatch(clearNav({}));
+                }}
                 style={tw`bg-gray-100 absolute top-16 left-8 z-50 p-3 rounded-full shadow-lg`}
             >
                 <Icon name='menu' />

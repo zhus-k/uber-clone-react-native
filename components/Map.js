@@ -23,10 +23,10 @@ const Map = () => {
             ],
             {
                 edgePadding: {
-                    top: 50,
-                    right: 50,
-                    bottom: 50,
-                    left: 50,
+                    top: 100,
+                    right: 100,
+                    bottom: 100,
+                    left: 100,
                 }
             }
         );
@@ -88,7 +88,7 @@ const Map = () => {
                     }}
                     title='Destination'
                     description={destination.description}
-                    identifier='Destination'
+                    identifier='destination'
                 />
             }
         </MapView>
